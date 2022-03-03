@@ -23,8 +23,31 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  const view = {
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.nj': 'nunjucks',
+    },
+  };
+  const security = {
+    csrf: false,
+    domainWhiteList: [ '*' ],
+    // ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
+  };
+  config.cors = {
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true,
+    origin: '*',
+  };
+  config.bodyParser = {
+    jsonLimit: '500mb',
+    formLimit: '500mb',
+  };
+
   return {
     ...config,
     ...userConfig,
+    view,
+    security,
   };
 };
