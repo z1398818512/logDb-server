@@ -43,6 +43,19 @@ module.exports = appInfo => {
     jsonLimit: '500mb',
     formLimit: '500mb',
   };
+  config.io = {
+    init: {},
+    namespace: {
+      '/': {
+        connectionMiddleware: [ 'connection' ],
+        packetMiddleware: [],
+      },
+      '/user': {
+        connectionMiddleware: [ 'user' ],
+        packetMiddleware: [],
+      },
+    },
+  };
 
   return {
     ...config,

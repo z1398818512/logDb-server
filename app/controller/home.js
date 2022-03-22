@@ -10,7 +10,7 @@ class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     ctx.response.type = 'html';
-    const page = await readFilePromise(path.resolve(__dirname, '../public/web/dist/index.html'));
+    const page = await readFilePromise(path.resolve(__dirname, '../../index.html'));
     ctx.body = page;
   }
 }
