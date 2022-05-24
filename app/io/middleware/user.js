@@ -1,4 +1,7 @@
 'use strict';
+const {backLink} = require('../../../config') 
+
+
 module.exports = () => {
   return async (ctx, next) => {
     
@@ -8,7 +11,7 @@ module.exports = () => {
     console.log('用户【'+roomId+'】已连接');
     ctx.socket.emit('pageUrl',{
       state:100,
-      data:`http://172.16.30.231:8000?roomId=${roomId}`
+      data:`${backLink}?roomId=${roomId}`
     })
     await next();
   };
