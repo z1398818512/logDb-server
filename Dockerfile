@@ -1,4 +1,4 @@
-FROM registry-vpc.cn-zhangjiakou.aliyuncs.com/raycloud-prod/node:14
+FROM registry-vpc.cn-zhangjiakou.aliyuncs.com/raycloud-prod/node:16
 
 WORKDIR /app
 COPY . .
