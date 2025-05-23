@@ -66,5 +66,5 @@ deploy_image:
     - apk add openssh
     - mkdir ~/.ssh; echo "${SSH_PRIVATE_KEY}" >> ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa
     - cd $CI_PROJECT_DIR; COMMIT_SHORT_SHA=$(echo $CI_COMMIT_SHA | awk '{print substr($0, 1, 7)}'); export COMMIT_SHORT_SHA
-    - ssh -o "StrictHostKeyChecking no" -i ~/.ssh/id_rsa tomcat@192.168.73.37 "source /etc/profile; bash /home/tomcat/bin/update.sh /home/tomcat/.kube/kubeconfig/192.168.59.72 ${CI_PROJECT_NAME} ${REPOSITORY_NAME}/raycloud-prod/${CI_PROJECT_NAME}:${COMMIT_SHORT_SHA}"
+    - ssh -o "StrictHostKeyChecking no" -i ~/.ssh/id_rsa tomcat@192.168.73.37 "source /etc/profile; bash /home/tomcat/bin/update.sh /home/tomcat/.kube/kubeconfig/192.168.58.67 ${CI_PROJECT_NAME} ${REPOSITORY_NAME}/raycloud-prod/${CI_PROJECT_NAME}:${COMMIT_SHORT_SHA}"
   when: manual
