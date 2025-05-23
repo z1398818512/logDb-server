@@ -1,0 +1,70 @@
+# .gitlab-ci.yml
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_REGISTRY_CRED: MzA1NDQyOTc3QDE3NTU5NzAyMTUxODEzNzQ6ZXZlS2hzIUs0NzIm
+  REPOSITORY_NAME: registry-vpc.cn-zhangjiakou.aliyuncs.com
+  SSH_PRIVATE_KEY: |+
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    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
+    -----END OPENSSH PRIVATE KEY-----
+
+build_image:
+  stage: build
+  image:
+    name: registry-vpc.cn-zhangjiakou.aliyuncs.com/raycloud-prod/kaniko-executor:debug
+    entrypoint: [ "" ]
+  variables:
+    GIT_DEPTH: "1"
+  script:
+    - echo "{\"auths\":{\"${REPOSITORY_NAME}\":{\"auth\":\"${DOCKER_REGISTRY_CRED}\"}}}" > /kaniko/.docker/config.json
+    - cd $CI_PROJECT_DIR; COMMIT_SHORT_SHA=$(echo $CI_COMMIT_SHA | awk '{print substr($0, 1, 7)}'); export COMMIT_SHORT_SHA
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination ${REPOSITORY_NAME}/raycloud-prod/${CI_PROJECT_NAME}:${COMMIT_SHORT_SHA}
+  when: manual
+deploy_image:
+  stage: deploy
+  image: alpine:3
+  script:
+    - sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+    - apk add openssh
+    - mkdir ~/.ssh; echo "${SSH_PRIVATE_KEY}" >> ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa
+    - cd $CI_PROJECT_DIR; COMMIT_SHORT_SHA=$(echo $CI_COMMIT_SHA | awk '{print substr($0, 1, 7)}'); export COMMIT_SHORT_SHA
+    - ssh -o "StrictHostKeyChecking no" -i ~/.ssh/id_rsa tomcat@192.168.73.37 "source /etc/profile; bash /home/tomcat/bin/update.sh /home/tomcat/.kube/kubeconfig/192.168.59.72 ${CI_PROJECT_NAME} ${REPOSITORY_NAME}/raycloud-prod/${CI_PROJECT_NAME}:${COMMIT_SHORT_SHA}"
+  when: manual
