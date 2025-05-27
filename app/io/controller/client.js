@@ -29,6 +29,13 @@ module.exports = app => {
         data: parmse
       })
     }
+    async get() {
+      const roomId = this.ctx.socket.roomId;
+      this.ctx.app.io.of('/').to(roomId).emit('query', {
+        state: 100,
+        data: 'hello'
+      })
+    }
   }
   return Controller;
 }
