@@ -33,7 +33,7 @@
     "egg-scripts": "./node_modules/.bin/egg-scripts"
   },
   "scripts": {
-    "start": "egg-scripts start --title=egg-server-egg",
+    "start": "egg-scripts start --title=egg-server-egg  --workers=1",
     "stop": "egg-scripts stop --title=egg-server-egg",
     "dev": "egg-bin dev --cluster --sticky",
     "debug": "egg-bin debug",
