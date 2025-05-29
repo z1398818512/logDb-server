@@ -66,11 +66,15 @@ module.exports = appInfo => {
       },
     },
   };
+  const cluster = {
+    workers: 1, //
+  };
 
   return {
     ...config,
     ...userConfig,
     view,
     security,
+    cluster,
   };
 };
