@@ -44,7 +44,13 @@ module.exports = appInfo => {
     formLimit: '500mb',
   };
   config.io = {
-    init: {},
+    init: {
+      path: '/logdb/socket.io',
+      cors: {
+        origin: '*',
+        methods: [ 'GET', 'POST' ],
+      },
+    },
     namespace: {
       '/': {
         connectionMiddleware: [ 'connection' ],
@@ -52,6 +58,10 @@ module.exports = appInfo => {
       },
       '/user': {
         connectionMiddleware: [ 'user' ],
+        packetMiddleware: [],
+      },
+      '/admin': {
+        connectionMiddleware: [ 'admin' ],
         packetMiddleware: [],
       },
     },
