@@ -7,10 +7,19 @@ module.exports = app => {
       const parmse = this.ctx.args[0];
       const { roomId } = parmse; 
       const currentUserSocket = this.ctx.app.userMap.get(roomId);
-      currentUserSocket && currentUserSocket.emit('query', {
-        state: 100,
-        data: parmse
-      });
+      if(currentUserSocket){
+          currentUserSocket.emit('query', {
+            state: 100,
+            data: parmse
+          });
+      }else{
+        this.ctx.socket.emit('responseData', {
+          state: 101,
+          data: {},
+          msg: '远程用户不存在或已断开'
+        })
+      }
+      
     }
     async openRealLog() {
       const parmse = this.ctx.args[0];

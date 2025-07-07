@@ -23,7 +23,7 @@ module.exports = () => {
     if (!ctx.app.userMap) ctx.app.userMap = new Map();
     if (!ctx.app.mapUpdateLogger) ctx.app.mapUpdateLogger = mapUpdateLogger.bind(null, ctx);
     // console.log(`${type}<${roomId}>已连接`);
-    ctx.logger.info('[%s <%s>已连接', type, roomId);
+    ctx.logger.info('[%s <%s>]已连接', type, roomId);
     ctx.app.mapUpdateLogger();
     await next();
   };

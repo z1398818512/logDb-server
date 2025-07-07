@@ -13,10 +13,12 @@ module.exports = app => {
   io.of('/admin').route('disconnect', app.io.controller.admin.disconnect);
   io.of('/admin').route('get', app.io.controller.admin.get);
 
-
-
   io.of('/user').route('send', app.io.controller.user.send);
   io.of('/user').route('sendonCeLog', app.io.controller.user.sendonCeLog);
   io.of('/user').route('disconnect', app.io.controller.user.disconnect);
 
+  router.post('/whiteUser/add', controller.white.saveWhiteUser);
+  router.get('/whiteUser/get', controller.white.getWhiteUser);
+  router.post('/whiteUser/del', controller.white.delWhiteUser);
+  router.get('/user/whiteUser/checkOpenOnline', controller.white.checkOpenOnline);
 };
